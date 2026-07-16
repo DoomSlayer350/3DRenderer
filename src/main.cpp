@@ -2,6 +2,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+void framebuffer_size_callback(GLFWwindow* Window, int Width, int Height);
+
 int main(){
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -25,7 +27,13 @@ int main(){
         return -1;
     }
     glViewport(0,0,WindowWidth,WindowHeight);
+    glfwSetFramebufferSizeCallback(Window, framebuffer_size_callback);
     std::cout<<"Program ran successfully"<<std::endl;
     glfwTerminate();
     return 0;
+}
+
+void framebuffer_size_callback(GLFWwindow* Window, int Width, int Height)
+{
+    glViewport(0,0,Width,Height);
 }
