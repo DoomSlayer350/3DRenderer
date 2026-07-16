@@ -24,7 +24,7 @@ int main(){
         std::cout<<"Failed to initialise GLAD"<<std::endl;
         return -1;
     }
-    glViewport(WindowWidth,WindowHeight,NULL,NULL);
+    glViewport(0,0,WindowWidth,WindowHeight);
     std::cout<<"Program ran successfully"<<std::endl;
     glfwTerminate();
     return 0;
