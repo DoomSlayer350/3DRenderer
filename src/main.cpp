@@ -28,6 +28,12 @@ int main(){
     }
     glViewport(0,0,WindowWidth,WindowHeight);
     glfwSetFramebufferSizeCallback(Window, framebuffer_size_callback);
+
+    while(!(glfwWindowShouldClose(Window)))
+    {
+        glfwSwapBuffers(Window);
+        glfwPollEvents();
+    }
     std::cout<<"Program ran successfully"<<std::endl;
     glfwTerminate();
     return 0;
