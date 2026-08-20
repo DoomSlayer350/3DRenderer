@@ -29,10 +29,15 @@ int main(){
     }
     glViewport(0,0,WindowWidth,WindowHeight);
     glfwSetFramebufferSizeCallback(Window, framebuffer_size_callback);
+    
 
+    // Render Loop
     while(!(glfwWindowShouldClose(Window)))
     {
         processInput(Window);
+
+        glClear(GL_COLOR_BUFFER_BIT);
+
         glfwSwapBuffers(Window);
         glfwPollEvents();
     }
@@ -50,5 +55,11 @@ void processInput(GLFWwindow* Window)
 {
     if(glfwGetKey(Window, GLFW_KEY_ENTER) == GLFW_PRESS){
         glfwSetWindowShouldClose(Window, true);
+    }
+    if(glfwGetKey(Window, GLFW_KEY_1) == GLFW_PRESS){
+        glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+    }
+    if(glfwGetKey(Window, GLFW_KEY_2) == GLFW_PRESS){
+        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     }
 }
