@@ -2,6 +2,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+// I accidentally got rid of local commit history I rendered a triangle and then git reset so i could test myself and proceeded to force push to branch 
+
 void framebuffer_size_callback(GLFWwindow* Window, int Width, int Height);
 void processInput(GLFWwindow* Window);
 
