@@ -65,7 +65,7 @@ void framebuffer_size_callback(GLFWwindow* Window, int Width, int Height)
 
 void processInput(GLFWwindow* Window)
 {
-    if(glfwGetKey(Window, GLFW_KEY_ENTER) == GLFW_PRESS){
+    if(glfwGetKey(Window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
         glfwSetWindowShouldClose(Window, true);
     }
     if(glfwGetKey(Window, GLFW_KEY_1) == GLFW_PRESS){
@@ -73,5 +73,8 @@ void processInput(GLFWwindow* Window)
     }
     if(glfwGetKey(Window, GLFW_KEY_2) == GLFW_PRESS){
         glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    }
+    if(glfwGetKey(Window, GLFW_KEY_0) == GLFW_PRESS){
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     }
 }
