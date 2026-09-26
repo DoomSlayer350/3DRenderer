@@ -32,6 +32,16 @@ int main(){
     glViewport(0,0,WindowWidth,WindowHeight);
     glfwSetFramebufferSizeCallback(Window, framebuffer_size_callback);
     
+    float vertices[] = {
+        -0.7f, -0.2f, 0.0f,
+        0.7f, -0.2f, 0.0f,
+        0.0f, 0.7f, 0.0f
+    };
+
+    unsigned int VertexBufferObject;
+    glGenBuffers(sizeof(1), &VertexBufferObject);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
 
     // Render Loop
     while(!(glfwWindowShouldClose(Window)))
