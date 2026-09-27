@@ -6,7 +6,7 @@
 void framebuffer_size_callback(GLFWwindow* Window, int Width, int Height);
 void processInput(GLFWwindow* Window);
 
-const char* VertexShader = 
+const char* VertexShaderSource = 
 "#version 330 core\n"
 "layout(location = 0) in vec3 aPos;\n"
 "void main()\n"
@@ -45,12 +45,26 @@ int main(){
         0.0f, 0.7f, 0.0f
     };
 
+    //Vertex Buffer Object
     unsigned int VertexBufferObject;
     glGenBuffers(sizeof(1), &VertexBufferObject);
-
     glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
-
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    //Vertex Shader
+    unsigned int VertexShader;
+    VertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(GL_VERTEX_SHADER, 1, &VertexShaderSource, NULL);
+    glCompileShader(VertexShader);
+
+    int success;
+    char InfoLog[512];
+    glGetShaderiv(VertexShader, GL_COMPILE_STATUS, &success);
+
+    if(!success){
+        glGetShaderInfoLog(VertexShader, 512, NULL, InfoLog);
+        std::cout<<"FAILED TO COMPILE VERTEX SHADER ---> "<<InfoLog<<std::endl;
+    }
 
     // Render Loop
     while(!(glfwWindowShouldClose(Window)))
