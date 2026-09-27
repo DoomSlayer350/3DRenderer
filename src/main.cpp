@@ -3,9 +3,16 @@
 #include <GLFW/glfw3.h>
 
 // I accidentally got rid of local commit history I rendered a triangle and then git reset so i could test myself and proceeded to force push to branch 
-
 void framebuffer_size_callback(GLFWwindow* Window, int Width, int Height);
 void processInput(GLFWwindow* Window);
+
+const char* VertexShader = 
+"#version 330 core\n"
+"layout(location = 0) in vec3 aPos;\n"
+"void main()\n"
+"{\n"
+"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"}\0";
 
 int main(){
     glfwInit();
@@ -42,6 +49,8 @@ int main(){
     glGenBuffers(sizeof(1), &VertexBufferObject);
 
     glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // Render Loop
     while(!(glfwWindowShouldClose(Window)))
