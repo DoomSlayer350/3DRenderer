@@ -87,6 +87,25 @@ int main(){
         std::cout<<"FAILED TO COMPILE FRAGMENT SHADER ---> "<<InfoLog<<std::endl;
     }
 
+    //Shader Program
+    unsigned int ShaderProgram;
+    ShaderProgram = glCreateProgram();
+
+    glAttachShader(ShaderProgram, VertexShader);
+    glAttachShader(ShaderProgram, FragmentShader);
+    glLinkProgram(ShaderProgram);
+
+    glGetProgramiv(ShaderProgram, GL_LINK_STATUS, &success);
+    if(!success){
+        glGetProgramInfoLog(ShaderProgram, 512, NULL, InfoLog);
+        std::cout<<"FAILED TO LINK SHADERS IN SHADER PROGRAM ---> "<<InfoLog<<std::endl;
+    }
+
+    glUseProgram(ShaderProgram);
+    
+    glDeleteShader(VertexShader);
+    glDeleteShader(FragmentShader);
+
     // Render Loop
     while(!(glfwWindowShouldClose(Window)))
     {
