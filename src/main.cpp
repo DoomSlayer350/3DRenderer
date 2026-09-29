@@ -53,12 +53,6 @@ int main(){
         0.0f, 0.7f, 0.0f
     };
 
-    //Vertex Buffer Object
-    unsigned int VertexBufferObject;
-    glGenBuffers(sizeof(1), &VertexBufferObject);
-    glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
     //Vertex Shader
     unsigned int VertexShader;
     VertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -106,12 +100,34 @@ int main(){
     glDeleteShader(VertexShader);
     glDeleteShader(FragmentShader);
 
+    // Vertex Array
+
+    unsigned int VertexArrayObject;
+    glGenVertexArrays(1, &VertexArrayObject);
+    glBindVertexArray(VertexArrayObject);
+
+    //Vertex Buffer Object
+    unsigned int VertexBufferObject;
+    glGenBuffers(sizeof(1), &VertexBufferObject);
+    glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    // Vertex Attributes
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+
     // Render Loop
     while(!(glfwWindowShouldClose(Window)))
     {
         processInput(Window);
 
         glClear(GL_COLOR_BUFFER_BIT);
+
+        glUseProgram(ShaderProgram);
+        glBindVertexArray(VertexArrayObject);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
 
         glfwSwapBuffers(Window);
         glfwPollEvents();
